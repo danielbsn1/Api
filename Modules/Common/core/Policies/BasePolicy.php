@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\Common\Core\Policies;
 
-use Modules\Common\Core\Enums\Role;
+use Modules\Common\Core\Enums\DefaultRole;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Database\Eloquent\Model;
 
@@ -39,12 +39,12 @@ abstract class BasePolicy
 
     protected function isAdmin(Model $user): bool
     {
-        return $user->role === Role::ADMIN;
+        return $user->role === DefaultRole::ADMIN || $user->role === DefaultRole::SUPER_ADMIN;
     }
 
     protected function isRhManager(Model $user): bool
     {
-        return in_array($user->role, [Role::ADMIN, Role::RH_MANAGER]);
+        return in_array($user->role, [DefaultRole::SUPER_ADMIN, DefaultRole::ADMIN, DefaultRole::MANAGER]);
     }
 
     protected function isSameUser(Model $user, Model $resource): bool

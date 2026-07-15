@@ -134,13 +134,17 @@ Modules/
 │   │   ├── Actions/
 │   │   │   └── BaseAction.php          ← contrato handle()
 │   │   ├── Contracts/
-│   │   │   └── HasCompany.php          ← interface para models multi-tenant
+│   │   │   ├── HasCompany.php          ← interface para models multi-tenant
+│   │   │   ├── TokenServiceInterface.php    ← contrato para geração/validação de JWT
+│   │   │   └── PasswordServiceInterface.php ← contrato para hash/reset de senha
 │   │   ├── Controllers/
 │   │   │   └── BaseController.php      ← success, created, paginated, noContent, error, execute
 │   │   ├── DTOs/
 │   │   │   └── BaseDTO.php             ← fromRequest, fromArray, toArray
 │   │   ├── Enums/
-│   │   │   └── Role.php                ← admin, rh_manager, rh_analyst, manager, employee
+│   │   │   ├── DefaultRole.php         ← roles do sistema com level, label, permissions
+│   │   │   ├── Permissions.php         ← todas as permissões do sistema (enum)
+│   │   │   └── PermissionGroups.php    ← agrupamento de permissões por módulo
 │   │   ├── Exceptions/
 │   │   │   ├── BusinessException.php   ← regra de negócio violada (422)
 │   │   │   └── NotFoundException.php   ← recurso não encontrado (404)
@@ -221,3 +225,130 @@ logs causando loop. Por isso herda direto de `Model`.
 
 ### LogObserver ignora ActivityLog
 Guard explícito para evitar que o observer tente logar o próprio log.
+
+---
+
+## Sistema de Roles e Permissões
+
+### Como funciona
+
+O sistema usa 3 enums que trabalham juntos:
+- `DefaultRole` — define os perfis de acesso
+- `Permissions` — define todas as ações possíveis no sistema
+- `PermissionGroups` — agrupa as permissões por módulo (usado em telas de configuração)
+
+### DefaultRole — como usar
+
+```php
+use Modules\Common\Core\Enums\DefaultRole;
+
+// Checar o role do usuário
+$user->role === DefaultRole::ADMIN;
+
+// Checar nível de acesso (quanto maior, mais acesso)
+$user->role->level(); // SUPER_ADMIN=100, ADMIN=90, MANAGER=70...
+
+// Checar se o role é protegido (não pode ser deletado)
+$user->role->isProtected(); // true para SUPER_ADMIN e ADMIN
+
+// Checar se o role é oculto (não aparece na listagem)
+$user->role->isHidden(); // true para SUPER_ADMIN
+
+// Pegar as permissões do role
+$user->role->permissions(); // retorna array de Permissions
+
+// No User model
+$user->hasRole(DefaultRole::ADMIN, DefaultRole::MANAGER);
+$user->isAdmin();
+$user->canManage(); // true se level >= MANAGER
+```
+
+| Role | Level | Descrição |
+|------|-------|-----------|
+| `super-admin` | 100 | Acesso total à plataforma |
+| `admin` | 90 | Acesso administrativo |
+| `manager` | 70 | Gerencia departamentos e times |
+| `supervisor` | 60 | Supervisiona processos |
+| `employee` | 40 | Usuário interno padrão |
+| `customer` | 20 | Acesso externo limitado |
+| `guest` | 10 | Somente leitura |
+
+### Permissions — como usar
+
+```php
+use Modules\Common\Core\Enums\Permissions;
+
+// Checar se usuário tem permissão (via gate do Laravel)
+Gate::allows(Permissions::EMPLOYEE_VIEW->value);
+
+// Pegar todas as permissões
+Permissions::cases();
+
+// No middleware ou policy
+$user->hasPermission(Permissions::EMPLOYEE_CREATE);
+```
+
+Permissões seguem o padrão `modulo.acao`:
+```
+auth.login, auth.logout, auth.manage-sessions
+user.view, user.create, user.update, user.delete
+role.view, role.create, role.update, role.delete
+employee.view, employee.create, employee.update, employee.delete
+company.view, company.create, company.update, company.delete
+```
+
+### PermissionGroups — como usar
+
+```php
+use Modules\Common\Core\Enums\PermissionGroups;
+
+// Pegar o módulo de um grupo
+PermissionGroups::EMPLOYEES->module(); // 'Employee'
+
+// Pegar label para exibição
+PermissionGroups::EMPLOYEES->label(); // 'Employees'
+
+// Pegar ícone (Heroicons)
+PermissionGroups::EMPLOYEES->icon(); // 'identification'
+
+// Listar todos os grupos organizados por módulo
+PermissionGroups::modules();
+// retorna: ['IAM' => [...], 'Employee' => [...], ...]
+```
+
+### Contracts — como usar
+
+**TokenServiceInterface** — qualquer implementação de token (JWT, Sanctum, etc) deve seguir esse contrato:
+```php
+// Implementar o contrato
+class JwtService implements TokenServiceInterface
+{
+    public function generate(array $payload): string { ... }
+    public function validate(string $token): bool { ... }
+    public function decode(string $token): array { ... }
+    public function refresh(string $token): string { ... }
+    public function invalidate(string $token): void { ... }
+}
+
+// Registrar no ServiceProvider
+$this->app->bind(TokenServiceInterface::class, JwtService::class);
+
+// Usar via injeção de dependência
+public function __construct(private TokenServiceInterface $tokenService) {}
+```
+
+**PasswordServiceInterface** — abstrai hash, verificação e reset de senha:
+```php
+class PasswordService implements PasswordServiceInterface
+{
+    public function hash(string $password): string { ... }
+    public function verify(string $password, string $hash): bool { ... }
+    public function isStrong(string $password): bool { ... }
+    public function generateReset(string $email): string { ... }
+    public function validateReset(string $token): bool { ... }
+}
+```
+
+### Por que usar Contracts (interfaces)?
+
+Se hoje você usa JWT e amanhã quiser trocar para Sanctum, você só troca a implementação no `ServiceProvider`. O resto do código não muda nada — ele depende da interface, não da implementação concreta.
