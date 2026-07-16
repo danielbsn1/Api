@@ -38,8 +38,8 @@ class ActivityLog extends Model
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
             'deleted_at' => 'datetime',
-            'before'     => 'array',
-            'after'      => 'array',
+            'before' => 'array',
+            'after' => 'array',
         ];
     }
 }

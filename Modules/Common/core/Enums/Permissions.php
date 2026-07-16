@@ -6,7 +6,6 @@ namespace Modules\Common\Core\Enums;
 
 enum Permissions: string
 {
-
     /*
     |--------------------------------------------------------------------------
     | Auth
@@ -83,7 +82,6 @@ enum Permissions: string
     case FINANCE_REFUND = 'finance.refund';
 
     // ...
-
 
     public function all(): array
     {

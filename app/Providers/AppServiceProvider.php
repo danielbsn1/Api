@@ -13,7 +13,6 @@ class AppServiceProvider extends ServiceProvider
     {
         Blueprint::macro('userActions', function (): void {
             /** @var Blueprint $this */
-
             $this->foreignId('created_by')
                 ->nullable()
                 ->constrained('users')

@@ -15,6 +15,7 @@ abstract class BaseDTO
     public static function fromArray(array $data): static
     {
         $request = new Request($data);
+
         return static::fromRequest($request);
     }
 }

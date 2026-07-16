@@ -6,12 +6,10 @@ namespace Modules\Common\Core\Support;
 
 enum Modules: string
 {
-   
-
     public static function all(): array
     {
         return [
-           
+
         ];
     }
 
@@ -23,7 +21,7 @@ enum Modules: string
     public function description(): string
     {
         return match ($this) {
-          
+
         };
     }
 }

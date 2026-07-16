@@ -20,7 +20,9 @@ final class Inss
         $faixaAnterior = 0;
 
         foreach (self::TABELA as $faixa) {
-            if ($centavos <= $faixaAnterior) break;
+            if ($centavos <= $faixaAnterior) {
+                break;
+            }
 
             $base = min($centavos, $faixa['limite']) - $faixaAnterior;
             $inss += (int) round($base * $faixa['aliquota'] / 100);

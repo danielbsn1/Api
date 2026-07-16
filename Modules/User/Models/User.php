@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Modules\User\Models;
 
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Modules\Common\Core\Enums\DefaultRole;
 use Modules\Common\Core\Models\BaseModel;
 use Modules\Common\Log\Support\Loggable;
-use Illuminate\Auth\Authenticatable;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 
 class User extends BaseModel implements AuthenticatableContract
 {
@@ -30,7 +30,7 @@ class User extends BaseModel implements AuthenticatableContract
     {
         return [
             ...parent::casts(),
-            'role'     => DefaultRole::class,
+            'role' => DefaultRole::class,
             'password' => 'hashed',
         ];
     }

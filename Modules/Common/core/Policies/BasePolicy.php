@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Modules\Common\Core\Policies;
 
-use Modules\Common\Core\Enums\DefaultRole;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Common\Core\Enums\DefaultRole;
 
 abstract class BasePolicy
 {
@@ -65,7 +65,7 @@ abstract class BasePolicy
 
     protected function canAccessResource(Model $user, Model $resource): bool
     {
-        if (!$this->belongsToSameCompany($user, $resource)) {
+        if (! $this->belongsToSameCompany($user, $resource)) {
             return false;
         }
 

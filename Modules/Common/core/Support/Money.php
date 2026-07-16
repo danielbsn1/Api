@@ -22,6 +22,7 @@ final class Money
     {
         $clean = str_replace(['.', 'R$', ' '], '', $value);
         $clean = str_replace(',', '.', $clean);
+
         return new self((int) round((float) $clean * 100));
     }
 
@@ -32,7 +33,7 @@ final class Money
 
     public function format(string $currency = 'R$'): string
     {
-        return $currency . ' ' . number_format($this->toFloat(), 2, ',', '.');
+        return $currency.' '.number_format($this->toFloat(), 2, ',', '.');
     }
 
     public function add(Money $other): self

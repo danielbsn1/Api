@@ -17,17 +17,17 @@ abstract class BaseRequest extends FormRequest
     {
         return [
             'required' => 'O campo :attribute é obrigatório.',
-            'string'   => 'O campo :attribute deve ser um texto.',
-            'integer'  => 'O campo :attribute deve ser um número inteiro.',
-            'numeric'  => 'O campo :attribute deve ser um número.',
-            'boolean'  => 'O campo :attribute deve ser verdadeiro ou falso.',
-            'email'    => 'O campo :attribute deve ser um e-mail válido.',
-            'min'      => 'O campo :attribute deve ter no mínimo :min caracteres.',
-            'max'      => 'O campo :attribute deve ter no máximo :max caracteres.',
-            'unique'   => 'O valor informado para :attribute já está em uso.',
-            'exists'   => 'O :attribute informado não existe.',
-            'date'     => 'O campo :attribute deve ser uma data válida.',
-            'in'       => 'O valor informado para :attribute é inválido.',
+            'string' => 'O campo :attribute deve ser um texto.',
+            'integer' => 'O campo :attribute deve ser um número inteiro.',
+            'numeric' => 'O campo :attribute deve ser um número.',
+            'boolean' => 'O campo :attribute deve ser verdadeiro ou falso.',
+            'email' => 'O campo :attribute deve ser um e-mail válido.',
+            'min' => 'O campo :attribute deve ter no mínimo :min caracteres.',
+            'max' => 'O campo :attribute deve ter no máximo :max caracteres.',
+            'unique' => 'O valor informado para :attribute já está em uso.',
+            'exists' => 'O :attribute informado não existe.',
+            'date' => 'O campo :attribute deve ser uma data válida.',
+            'in' => 'O valor informado para :attribute é inválido.',
         ];
     }
 }

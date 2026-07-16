@@ -11,7 +11,8 @@ final readonly class Phone
     public static function format(string $phone): string
     {
         $phone = self::unformat($phone);
-        return '(' . substr($phone, 0, 2) . ') ' . substr($phone, 2, 4) . '-' . substr($phone, 6, 4);
+
+        return '('.substr($phone, 0, 2).') '.substr($phone, 2, 4).'-'.substr($phone, 6, 4);
     }
 
     public static function unformat(string $phone): string

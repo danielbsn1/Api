@@ -5,10 +5,7 @@ declare(strict_types=1);
 namespace Modules\Common\Core\Enums;
 
 enum PermissionGroups: string
-
 {
-   
-
     case AUTH = 'auth';
     case USERS = 'users';
     case ROLES = 'roles';
@@ -18,12 +15,9 @@ enum PermissionGroups: string
     case OAUTH = 'oauth';
     case MFA = 'mfa';
 
-
     case TENANTS = 'tenants';
     case COMPANIES = 'companies';
     case BRANCHES = 'branches';
-
-    
 
     case EMPLOYEES = 'employees';
     case DEPARTMENTS = 'departments';
@@ -31,56 +25,38 @@ enum PermissionGroups: string
     case TEAMS = 'teams';
     case SHIFTS = 'shifts';
 
-   
-
     case CUSTOMERS = 'customers';
     case LEADS = 'leads';
     case CONTACTS = 'contacts';
-
-  
 
     case SALES = 'sales';
     case QUOTATIONS = 'quotations';
     case ORDERS = 'orders';
     case INVOICES = 'invoices';
 
-   
-
     case SUPPLIERS = 'suppliers';
     case PURCHASES = 'purchases';
-
-    
 
     case PRODUCTS = 'products';
     case CATEGORIES = 'categories';
     case STOCK = 'stock';
     case WAREHOUSES = 'warehouses';
 
-   
-
     case FINANCE = 'finance';
     case ACCOUNTS_PAYABLE = 'accounts-payable';
     case ACCOUNTS_RECEIVABLE = 'accounts-receivable';
     case CASH_FLOW = 'cash-flow';
 
-    
-
     case REPORTS = 'reports';
     case DASHBOARDS = 'dashboards';
-
-    
 
     case SETTINGS = 'settings';
     case THEMES = 'themes';
     case EMAILS = 'emails';
     case NOTIFICATIONS = 'notifications';
 
-   
-
     case AUDIT = 'audit';
     case LOGS = 'logs';
-
-    
 
     case MEDIA = 'media';
     case OTHERS = 'others';
@@ -96,64 +72,52 @@ enum PermissionGroups: string
             self::SESSIONS,
             self::API_TOKENS,
             self::OAUTH,
-            self::MFA
-                => 'IAM',
+            self::MFA => 'IAM',
 
             self::TENANTS,
             self::COMPANIES,
-            self::BRANCHES
-                => 'Organization',
+            self::BRANCHES => 'Organization',
 
             self::EMPLOYEES,
             self::DEPARTMENTS,
             self::POSITIONS,
             self::TEAMS,
-            self::SHIFTS
-                => 'Employee',
+            self::SHIFTS => 'Employee',
 
             self::CUSTOMERS,
             self::LEADS,
-            self::CONTACTS
-                => 'CRM',
+            self::CONTACTS => 'CRM',
 
             self::SALES,
             self::QUOTATIONS,
             self::ORDERS,
-            self::INVOICES
-                => 'Sales',
+            self::INVOICES => 'Sales',
 
             self::SUPPLIERS,
-            self::PURCHASES
-                => 'Purchases',
+            self::PURCHASES => 'Purchases',
 
             self::PRODUCTS,
             self::CATEGORIES,
             self::STOCK,
-            self::WAREHOUSES
-                => 'Inventory',
+            self::WAREHOUSES => 'Inventory',
 
             self::FINANCE,
             self::ACCOUNTS_PAYABLE,
             self::ACCOUNTS_RECEIVABLE,
-            self::CASH_FLOW
-                => 'Finance',
+            self::CASH_FLOW => 'Finance',
 
             self::REPORTS,
-            self::DASHBOARDS
-                => 'Reports',
+            self::DASHBOARDS => 'Reports',
 
             self::SETTINGS,
             self::THEMES,
             self::EMAILS,
-            self::NOTIFICATIONS
-                => 'Settings',
+            self::NOTIFICATIONS => 'Settings',
 
             self::AUDIT,
-            self::LOGS
-                => 'Audit',
+            self::LOGS => 'Audit',
 
-            default
-                => 'General',
+            default => 'General',
         };
     }
 

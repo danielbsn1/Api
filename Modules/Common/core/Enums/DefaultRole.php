@@ -4,30 +4,17 @@ declare(strict_types=1);
 
 namespace Modules\Common\Core\Enums;
 
-use Modules\Common\Core\Enums\Permissions;
-
-
 enum DefaultRole: string
 {
-    
-
     case SUPER_ADMIN = 'super-admin';
     case ADMIN = 'admin';
-
-    
 
     case MANAGER = 'manager';
     case SUPERVISOR = 'supervisor';
 
-    
-
     case EMPLOYEE = 'employee';
 
-   
-
     case CUSTOMER = 'customer';
-
-    
 
     case GUEST = 'guest';
 
@@ -75,26 +62,19 @@ enum DefaultRole: string
     {
         return match ($this) {
 
-            self::SUPER_ADMIN =>
-                'Full access to the entire platform.',
+            self::SUPER_ADMIN => 'Full access to the entire platform.',
 
-            self::ADMIN =>
-                'Administrative access with permission management.',
+            self::ADMIN => 'Administrative access with permission management.',
 
-            self::MANAGER =>
-                'Responsible for managing departments and teams.',
+            self::MANAGER => 'Responsible for managing departments and teams.',
 
-            self::SUPERVISOR =>
-                'Supervises employees and operational processes.',
+            self::SUPERVISOR => 'Supervises employees and operational processes.',
 
-            self::EMPLOYEE =>
-                'Standard internal user.',
+            self::EMPLOYEE => 'Standard internal user.',
 
-            self::CUSTOMER =>
-                'External customer with limited access.',
+            self::CUSTOMER => 'External customer with limited access.',
 
-            self::GUEST =>
-                'Read-only access.',
+            self::GUEST => 'Read-only access.',
         };
     }
 
@@ -162,38 +142,31 @@ enum DefaultRole: string
     {
         return match ($this) {
 
-            self::SUPER_ADMIN
-                => Permissions::cases(),
+            self::SUPER_ADMIN => Permissions::cases(),
 
-            self::ADMIN
-                => [
-                     Permissions::USER_VIEW,
-                     Permissions::USER_CREATE,
-                     Permissions::ROLE_UPDATE,
-                ],
+            self::ADMIN => [
+                Permissions::USER_VIEW,
+                Permissions::USER_CREATE,
+                Permissions::ROLE_UPDATE,
+            ],
 
-            self::MANAGER
-                => [
-                    // ...
-                ],
+            self::MANAGER => [
+                // ...
+            ],
 
-            self::SUPERVISOR
-                => [
-                    // ...
-                ],
+            self::SUPERVISOR => [
+                // ...
+            ],
 
-            self::EMPLOYEE
-                => [
-                    // ...
-                ],
+            self::EMPLOYEE => [
+                // ...
+            ],
 
-            self::CUSTOMER
-                => [
-                    // ...
-                ],
+            self::CUSTOMER => [
+                // ...
+            ],
 
-            self::GUEST
-                => [],
+            self::GUEST => [],
         };
     }
 

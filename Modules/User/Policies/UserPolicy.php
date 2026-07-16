@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Modules\User\Policies;
 
-use Modules\Common\Core\Enums\Role;
 use Modules\Common\Core\Policies\BasePolicy;
 use Modules\User\Models\User;
 
@@ -40,7 +39,7 @@ class UserPolicy extends BasePolicy
     public function delete(User $user, User $resource): bool
     {
         return $this->isAdmin($user)
-            && !$this->isSameUser($user, $resource);
+            && ! $this->isSameUser($user, $resource);
     }
 
     // Só admin pode alterar roles

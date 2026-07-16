@@ -28,9 +28,9 @@ final readonly class Formatter
 
     public const CPF = 'cpf';
 
-    Public const CNPJ = 'cnpj';
+    public const CNPJ = 'cnpj';
 
-    Public const MONEY = 'salary';
+    public const MONEY = 'salary';
 
     public const PHONE = 'phone';
 
@@ -48,7 +48,7 @@ final readonly class Formatter
 
     public static function formatMoney(mixed $value, string $currency = self::DEFAULT_CURRENCY): string
     {
-        return $currency . self::formatFloat($value);
+        return $currency.self::formatFloat($value);
     }
 
     public static function formatBoolean(bool $value, string $trueValue = self::YES_LABEL, string $falseValue = self::NO_LABEL): string

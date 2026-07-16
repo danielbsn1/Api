@@ -11,7 +11,8 @@ final readonly class Cnpj
     public static function format(string $cnpj): string
     {
         $cnpj = self::unformat($cnpj);
-        return substr($cnpj, 0, 2) . '.' . substr($cnpj, 2, 3) . '.' . substr($cnpj, 5, 3) . '/' . substr($cnpj, 8, 4) . '-' . substr($cnpj, 12, 2);
+
+        return substr($cnpj, 0, 2).'.'.substr($cnpj, 2, 3).'.'.substr($cnpj, 5, 3).'/'.substr($cnpj, 8, 4).'-'.substr($cnpj, 12, 2);
     }
 
     public static function unformat(string $cnpj): string

@@ -7,13 +7,12 @@ namespace Modules\Common\Core\Support;
 enum NotificationType: string
 {
     case RELEASE_NOTES = 'release-notes';
-  
 
     public static function all(): array
     {
         return [
             self::RELEASE_NOTES,
-          
+
         ];
     }
 
@@ -26,7 +25,7 @@ enum NotificationType: string
     {
         return match ($this) {
             self::RELEASE_NOTES => 'Notificação de novas notas de versão',
-         
+
         };
     }
 }

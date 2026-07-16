@@ -11,7 +11,8 @@ final readonly class Cpf
     public static function format(string $cpf): string
     {
         $cpf = self::unformat($cpf);
-        return substr($cpf, 0, 3) . '.' . substr($cpf, 3, 3) . '.' . substr($cpf, 6, 3) . '-' . substr($cpf, 9, 2);
+
+        return substr($cpf, 0, 3).'.'.substr($cpf, 3, 3).'.'.substr($cpf, 6, 3).'-'.substr($cpf, 9, 2);
     }
 
     public static function unformat(string $cpf): string
