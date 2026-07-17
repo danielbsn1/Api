@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Modules\User\Models;
 
-use Modules\Common\Core\Enums\Role;
+use Modules\Common\Core\Enums\DefaultRole;
 use Modules\Common\Core\Models\BaseModel;
 use Modules\Common\Log\Support\Loggable;
 use Illuminate\Auth\Authenticatable;
@@ -30,23 +30,23 @@ class User extends BaseModel implements AuthenticatableContract
     {
         return [
             ...parent::casts(),
-            'role'     => Role::class,
+            'role'     => DefaultRole::class,
             'password' => 'hashed',
         ];
     }
 
-    public function hasRole(Role ...$roles): bool
+    public function hasRole(DefaultRole ...$roles): bool
     {
         return in_array($this->role, $roles);
     }
 
     public function isAdmin(): bool
     {
-        return $this->role === Role::ADMIN;
+        return in_array($this->role, [DefaultRole::ADMIN, DefaultRole::SUPER_ADMIN]);
     }
 
     public function canManage(): bool
     {
-        return $this->role?->canManage() ?? false;
+        return $this->role?->level() >= DefaultRole::MANAGER->level();
     }
 }
