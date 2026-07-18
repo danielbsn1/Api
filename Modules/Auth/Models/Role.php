@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace Modules\Auth\Models;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Modules\Common\Core\Enums\Role as RoleEnum;
+use Modules\Auth\Exceptions\ProtectedRoleException;
+use Modules\Common\Core\Enums\DefaultRole;
 use Spatie\Permission\Models\Role as SpatieRole;
 
 class Role extends SpatieRole
@@ -21,7 +22,7 @@ class Role extends SpatieRole
     {
         return in_array(
             $this->name,
-            array_map(fn (RoleEnum $role) => $role->value, Roles::hidden())
+            array_map(fn (DefaultRole $role) => $role->value, DefaultRole::hidden())
         );
     }
 
@@ -35,7 +36,7 @@ class Role extends SpatieRole
 
         static::addGlobalScope(
             'hidden',
-            fn (Builder $builder) => $builder->whereNotIn('name', RoleEnum::hidden())
+            fn (Builder $builder) => $builder->whereNotIn('name', array_map(fn (DefaultRole $role) => $role->value, DefaultRole::hidden()))
         );
     }
 }

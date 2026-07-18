@@ -2,16 +2,19 @@
 
 declare(strict_types=1);
 
+namespace Modules\Auth\DTOs;
+
 use WendellAdriel\ValidatedDTO\ValidatedDTO;
 
-final class ConfirmTwoFactorDTO extends ValidatedDTO
+final class SyncRolePermissionsDTO extends ValidatedDTO
 {
-    public bool $code;
+    public array $permissions;
 
     protected function rules(): array
     {
         return [
-            'code' => ['required', 'string'],
+            'permissions' => ['required', 'array'],
+            'permissions.*' => ['exists:permissions,name'],
         ];
     }
 

@@ -2,15 +2,20 @@
 
 declare(strict_types=1);
 
+namespace Modules\Auth\DTOs;
+
 use WendellAdriel\ValidatedDTO\ValidatedDTO;
 
-final class ConfirmTwoFactorDTO extends ValidatedDTO
+final class LoginWithTwoFactorDTO extends ValidatedDTO
 {
-    public bool $code;
+    public string $uuid;
+
+    public string $code;
 
     protected function rules(): array
     {
         return [
+            'uuid' => ['required', 'string', 'uuid'],
             'code' => ['required', 'string'],
         ];
     }
