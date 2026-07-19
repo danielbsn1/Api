@@ -7,12 +7,11 @@ namespace Modules\Auth\Actions;
 use Illuminate\Support\Collection;
 use Modules\Auth\Models\User;
 
-final readonly class FetchUsersCounts
+final readonly class FetchUserCounts
 {
     public function handle(): Collection
     {
         $grouped = User::query()
-            ->all()
             ->get()
             ->groupBy(fn (User $user) => $user->active ? 'active' : 'inactive')
             ->mapWithKeys(fn (Collection $group, string $key) => [$key => $group->count()]);

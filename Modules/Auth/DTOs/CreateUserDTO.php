@@ -33,7 +33,7 @@ final class CreateUserDTO extends ValidatedDTO
             'password' => ['required', Password::min(8)->max(255), 'confirmed',
             ],
 
-            'role' => ['required', 'int', 'exists:role,id', 'not_in:1'],
+            'role' => ['required', 'int', 'exists:roles,id', 'not_in:1'],
             'extra_permissions' => ['sometimes', 'array'],
             'extra_permissions.*' => ['exists:permissions,name'],
         ];

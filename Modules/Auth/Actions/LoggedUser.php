@@ -11,7 +11,7 @@ final readonly class LoggedUser
 {
     public function handle(): User
     {
-        $user = Auth::user();
+        $user = Auth::guard('api')->user();
 
         return $user;
     }

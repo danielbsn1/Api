@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Modules\Auth\Actions;
 
-use ConfirmTwoFactorDTO as GlobalConfirmTwoFactorDTO;
 use Modules\Auth\DTOs\ConfirmTwoFactorDTO;
 use PragmaRX\Google2FA\Google2FA;
 
@@ -15,7 +14,7 @@ final readonly class ValidateTwoFactor
         private Google2FA $google2fa
     ) {}
 
-    public function handle(GlobalConfirmTwoFactorDTO $dto): bool
+    public function handle(ConfirmTwoFactorDTO $dto): bool
     {
         $user = $this->loggedUser->handle();
 

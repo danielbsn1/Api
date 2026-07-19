@@ -11,7 +11,7 @@ final readonly class FetchUser
 {
     public function handle(string $uuid): User
     {
-        $user = User::find($uuid);
+        $user = User::findByUuid($uuid);
 
         if (!$user) {
             throw new NotFoundException('User');

@@ -4,36 +4,19 @@ declare(strict_types=1);
 
 namespace Modules\Auth\Actions;
 
-use Exception;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Modules\Auth\DTOs\CreateUserDTO;
-use Modules\Auth\Models\User;
+use Modules\Auth\Models\Role;
+use Modules\Common\Core\Exceptions\NotFoundException;
 
-final readonly class CreateUser
+final readonly class DeleteRole
 {
-    public function handle(CreateUserDTO $dto): User
+    public function handle(int $id): void
     {
-        try {
-            DB::beginTransaction();
+        $role = Role::find($id);
 
-            $user = $dto->toModel(User::class);
-            $user->password = Hash::make($dto->password);
-            $user->save();
-
-            $user->assignRole($dto->role);
-
-            if ($dto->extra_permissions) {
-                $user->givePermissionTo($dto->extra_permissions);
-            }
-
-            DB::commit();
-        } catch (Exception $e) {
-            DB::rollBack();
-
-            throw $e;
+        if (! $role) {
+            throw new NotFoundException('Role');
         }
 
-        return $user;
+        $role->delete();
     }
 }

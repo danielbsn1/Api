@@ -29,12 +29,14 @@ final class ImpersonateManager
 
     public function getImpersonatorId(): ?string
     {
-        return $this->auth->parseToken()->getPayLoad()->get($this->getImpersonatedByKeyName());
+        $value = $this->auth->parseToken()->getPayLoad()->get($this->getImpersonatedByKeyName());
+
+        return $value !== null ? (string) $value : null;
     }
 
     public function setImpersonatorId(User $impersonator): void
     {
-        $this->auth->customClaims([$this->getImpersonatedByKeyName() => $impersonator->getRouteKey()]);
+        $this->auth->customClaims([$this->getImpersonatedByKeyName() => $impersonator->uuid]);
     }
 
     public function take(User $from, User $to): string
@@ -81,7 +83,7 @@ final class ImpersonateManager
 
     public function retrieveToken(): string
     {
-        return $this->auth->getToken();
+        return (string) $this->auth->getToken();
     }
 
     public function deferLogout(): void

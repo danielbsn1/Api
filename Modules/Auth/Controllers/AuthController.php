@@ -16,7 +16,7 @@ use Modules\Auth\Resources\LoginResource;
 use Modules\Auth\Resources\LoginWithTwoFactorResource;
 use Modules\Auth\Resources\TokenResource;
 use Modules\Auth\Resources\UserResource;
-use Modules\Common\Core\Http\Responses\ApiSuccessResponse;
+use Modules\Common\Core\Responses\ApiSuccessResponse;
 use Modules\Common\Core\Responses\NoContentResponse;
 use Modules\Common\Core\Support\Modules;
 use Modules\Common\Logs\Support\AccessActions;
@@ -41,8 +41,8 @@ final class AuthController extends Controller
 
     public function logout(): NoContentResponse
     {
-        AccessLogHelper::log(action: AccessActions::LOGOUT, module: Modules::AUTH);
-        Auth::logout(true);
+        AccessLogHelper::log(action: AccessActions::LOGOUT, module: Modules::Auth);
+        Auth::logout();
 
         return new NoContentResponse();
     }

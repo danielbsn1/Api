@@ -2,11 +2,13 @@
 
 declare(strict_types=1);
 
+namespace Modules\Auth\DTOs;
+
 use WendellAdriel\ValidatedDTO\ValidatedDTO;
 
 final class ConfirmTwoFactorDTO extends ValidatedDTO
 {
-    public bool $code;
+    public string $code;
 
     protected function rules(): array
     {

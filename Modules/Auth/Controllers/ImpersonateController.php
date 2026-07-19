@@ -11,17 +11,28 @@ use Modules\Auth\Actions\TakeUser;
 use Modules\Auth\Resources\ImpersonatingResource;
 use Modules\Auth\Resources\TokenResource;
 use Modules\Common\Core\Responses\ApiSuccessResponse;
-
 final class ImpersonateController extends Controller
 {
+    private const TOKEN_TYPE = 'Bearer';
+
     public function take(string $uuid, TakeUser $action): ApiSuccessResponse
     {
-        return new ApiSuccessResponse(new TokenResource($action->handle($uuid)));
+        $token = $action->handle($uuid);
+
+        return new ApiSuccessResponse(new TokenResource([
+            'type' => self::TOKEN_TYPE,
+            'token' => $token,
+        ]));
     }
 
     public function leave(LeaveUser $action): ApiSuccessResponse
     {
-        return new ApiSuccessResponse(new TokenResource($action->handle()));
+        $token = $action->handle();
+
+        return new ApiSuccessResponse(new TokenResource([
+            'type' => self::TOKEN_TYPE,
+            'token' => $token,
+        ]));
     }
 
     public function info(Impersonating $action): ApiSuccessResponse

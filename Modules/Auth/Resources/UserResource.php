@@ -18,19 +18,24 @@ final class UserResource extends JsonResource
         $departureAt = $request->query('departure_at');
         $returnAt = $request->query('return_at');
 
+        $this->loadMissing('roles', 'latestLogin');
+
+        $roles = $this->resource->roles ?? collect();
         $data = [
             'id' => $this->uuid,
             'name' => $this->name,
             'login' => $this->login,
             'email' => $this->email,
-            'roles' => $this->loadIfMissing('roles')->pluck('id'),
-            'permissions' => $this->loadIfMissing('roles')->isNotEmpty()
-                ? $this->getAllPermissions()->pluck('name')
+            'roles' => $roles->pluck('id'),
+            'permissions' => $roles->isNotEmpty()
+                ? $this->resource->getAllPermissions()->pluck('name')
                 : [],
             'active' => $this->active,
-            'avatar' => $this->getFirstTemporaryUrl(Carbon::now()->addHours(2), 'avatars', 'large') ?: null,
+            'avatar' => method_exists($this->resource, 'getFirstTemporaryUrl')
+                ? ($this->resource->getFirstTemporaryUrl(Carbon::now()->addHours(2), 'avatars', 'large') ?: null)
+                : null,
                 
-            'last_login_at' => optional($this->loadIfMissing('latestLogin'))->created_at,
+            'last_login_at' => optional($this->resource->latestLogin)->created_at,
             'driver' => $this->driver,
             'two_factor_confirmed_at' => $this->two_factor_confirmed_at,
             'created_at' => $this->created_at,
