@@ -8,7 +8,6 @@ use Exception;
 use Illuminate\Support\Facades\DB;
 use Modules\Auth\DTOs\UpdateRoleDTO;
 use Modules\Auth\Models\Role;
-use Modules\Common\Core\Exceptions\NotFoundException;
 
 final readonly class UpdateRole
 {

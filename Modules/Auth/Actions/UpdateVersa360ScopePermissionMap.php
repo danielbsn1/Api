@@ -6,7 +6,6 @@ namespace Modules\Auth\Actions;
 
 use Modules\Auth\DTOs\UpdateVersa360ScopePermissionMapDTO;
 use Modules\Auth\Models\Versa360ScopePermissionMap;
-use Modules\Common\Core\Exceptions\NotFoundException;
 
 final readonly class UpdateVersa360ScopePermissionMap
 {

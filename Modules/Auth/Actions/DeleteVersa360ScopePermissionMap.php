@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Modules\Auth\Actions;
 
 use Modules\Auth\Models\Versa360ScopePermissionMap;
-use Modules\Common\Core\Exceptions\NotFoundException;
 
 final readonly class DeleteVersa360ScopePermissionMap
 {

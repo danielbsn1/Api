@@ -94,7 +94,7 @@ final readonly class Login
 
     private function throttleKey(): string
     {
-        return Str::transliterate(Str::lower($this->request->login) . '|' . $this->request->ip());
+        return Str::transliterate(Str::lower($this->request->login).'|'.$this->request->ip());
     }
 
     private function recordLogin(User $user): void

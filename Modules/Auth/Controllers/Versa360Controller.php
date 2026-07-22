@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Modules\Auth\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use Modules\Auth\Actions\CreateVersa360ScopePermissionMap;
 use Modules\Auth\Actions\DeleteVersa360ScopePermissionMap;
 use Modules\Auth\Actions\FetchVersa360Client;
@@ -27,7 +28,7 @@ final class Versa360Controller extends Controller
         return new ApiSuccessResponse(new Versa360Resource($action->handle()));
     }
 
-    public function redirect(): \Illuminate\Http\RedirectResponse
+    public function redirect(): RedirectResponse
     {
         return redirect()->away('about:blank')->header('X-Redirect-Handled', 'external');
     }

@@ -8,11 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Carbon;
 
-
-
 final class UserResource extends JsonResource
 {
-    
     public function toArray(Request $request): array
     {
         $departureAt = $request->query('departure_at');
@@ -34,7 +31,7 @@ final class UserResource extends JsonResource
             'avatar' => method_exists($this->resource, 'getFirstTemporaryUrl')
                 ? ($this->resource->getFirstTemporaryUrl(Carbon::now()->addHours(2), 'avatars', 'large') ?: null)
                 : null,
-                
+
             'last_login_at' => optional($this->resource->latestLogin)->created_at,
             'driver' => $this->driver,
             'two_factor_confirmed_at' => $this->two_factor_confirmed_at,

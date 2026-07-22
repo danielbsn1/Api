@@ -6,7 +6,6 @@ namespace Modules\Auth\Actions;
 
 use Modules\Auth\DTOs\UpdateUserAvatarDTO;
 use Modules\Auth\Models\User;
-use Modules\Common\Core\Exceptions\NotFoundException;
 
 final readonly class UpdateUserAvatar
 {

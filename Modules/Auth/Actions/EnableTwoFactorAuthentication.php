@@ -21,7 +21,7 @@ final readonly class EnableTwoFactorAuthentication
 
         $recoveryCodes = [];
         for ($i = 0; $i < 8; $i++) {
-            $recoveryCodes[] = Str::random(10) . '-' . Str::random(10);
+            $recoveryCodes[] = Str::random(10).'-'.Str::random(10);
         }
 
         $user->forceFill([

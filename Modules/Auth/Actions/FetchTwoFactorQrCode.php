@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Modules\Auth\Actions;
 
-use Modules\Auth\Models\User;
 use PragmaRX\Google2FA\Google2FA;
 
 final readonly class FetchTwoFactorQrCode

@@ -13,7 +13,7 @@ final readonly class FetchUser
     {
         $user = User::findByUuid($uuid);
 
-        if (!$user) {
+        if (! $user) {
             throw new NotFoundException('User');
         }
 

@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Modules\Common\Core\DTOs\DatableDTO;
-use Modules\Common\Core\DTOs\DatatableDTO;
 
 readonly class Datable
 {

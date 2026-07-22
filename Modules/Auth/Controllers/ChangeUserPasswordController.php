@@ -16,6 +16,6 @@ class ChangeUserPasswordController extends Controller
     {
         $action->handle($uuid, ChangeUserPasswordDTO::fromRequest($request));
 
-        return new NoContentResponse();
+        return new NoContentResponse;
     }
 }

@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace Modules\Auth\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 use Modules\Auth\Actions\UpdateUserAvatar;
 use Modules\Auth\DTOs\UpdateUserAvatarDTO;
 use Modules\Auth\Resources\UserResource;

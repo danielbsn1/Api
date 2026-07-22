@@ -15,6 +15,6 @@ final class PasswordResetLinkController extends Controller
     {
         $action->handle($dto);
 
-        return new ApiSuccessResponse();
+        return new ApiSuccessResponse;
     }
 }

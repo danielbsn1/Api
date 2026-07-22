@@ -9,7 +9,6 @@ use Illuminate\Http\JsonResponse;
 use Modules\Auth\Actions\FetchRolePermissionsList;
 use Modules\Auth\Actions\SyncRolePermissions;
 use Modules\Auth\DTOs\SyncRolePermissionsDTO;
-use Modules\Auth\Resources\PermissionResource;
 use Modules\Common\Core\Responses\NoContentResponse;
 
 final class RolePermissionController extends Controller
@@ -28,6 +27,6 @@ final class RolePermissionController extends Controller
     {
         $action->handle($id, $dto);
 
-        return new NoContentResponse();
+        return new NoContentResponse;
     }
 }

@@ -8,7 +8,6 @@ use Modules\Auth\Controllers\ChangeUserAvatarController;
 use Modules\Auth\Controllers\ChangeUserPasswordController;
 use Modules\Auth\Controllers\ImpersonateController;
 use Modules\Auth\Controllers\NewPasswordController;
-use Modules\Auth\Controllers\PasswordResetLinkController;
 use Modules\Auth\Controllers\PermissionController;
 use Modules\Auth\Controllers\RoleController;
 use Modules\Auth\Controllers\RoleMemberController;
@@ -17,14 +16,15 @@ use Modules\Auth\Controllers\SettingsController;
 use Modules\Auth\Controllers\TwoFactorController;
 use Modules\Auth\Controllers\UserController;
 use Modules\Auth\Controllers\UserRoleController;
+use Modules\Auth\Middleware\ValidateDomain;
 use Modules\Auth\Middlewares\ProtectFromImpersonation;
 
 // Public Routes
 Route::prefix('auth')->group(function () {
     Route::post('login', [AuthController::class, 'login'])
-        ->middleware(\Modules\Auth\Middleware\ValidateDomain::class);
+        ->middleware(ValidateDomain::class);
     Route::post('login/2fa', [AuthController::class, 'loginWithTwoFactor'])
-        ->middleware(\Modules\Auth\Middleware\ValidateDomain::class);
+        ->middleware(ValidateDomain::class);
     Route::post('refresh', [AuthController::class, 'refresh']);
 
     Route::post('reset-password', NewPasswordController::class);

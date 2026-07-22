@@ -44,7 +44,7 @@ final class AuthController extends Controller
         AccessLogHelper::log(action: AccessActions::LOGOUT, module: Modules::Auth);
         Auth::logout();
 
-        return new NoContentResponse();
+        return new NoContentResponse;
     }
 
     public function user(LoggedUser $action): ApiSuccessResponse

@@ -22,7 +22,7 @@ abstract class Filters
 
     protected function resolveFilter(string $filter): Filter
     {
-        return new $this->filters[$filter]();
+        return new $this->filters[$filter];
     }
 
     protected function receivedFilters(): array

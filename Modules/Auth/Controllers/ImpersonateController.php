@@ -11,6 +11,7 @@ use Modules\Auth\Actions\TakeUser;
 use Modules\Auth\Resources\ImpersonatingResource;
 use Modules\Auth\Resources\TokenResource;
 use Modules\Common\Core\Responses\ApiSuccessResponse;
+
 final class ImpersonateController extends Controller
 {
     private const TOKEN_TYPE = 'Bearer';

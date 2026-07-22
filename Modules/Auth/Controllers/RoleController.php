@@ -45,6 +45,6 @@ final class RoleController extends Controller
     {
         $action->handle($id);
 
-        return new NoContentResponse();
+        return new NoContentResponse;
     }
 }

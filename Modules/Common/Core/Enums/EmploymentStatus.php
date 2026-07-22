@@ -6,45 +6,42 @@ namespace Modules\Common\Core\Enums;
 
 enum EmploymentStatus: string
 {
-  case ACTIVE = 'Active';
+    case ACTIVE = 'Active';
 
-  case INACTIVE = 'Inactive';
- 
-  case TERMINATED = 'Terminated';
+    case INACTIVE = 'Inactive';
 
-  case ON_LEAVE = 'On_Leave';
+    case TERMINATED = 'Terminated';
 
-  case SUSPENDED = 'Suspended';
+    case ON_LEAVE = 'On_Leave';
 
-  public static function all(): array
-  {
-    return [
-         self::ACTIVE,
-         self::INACTIVE,
-         self::TERMINATED,
-         self::ON_LEAVE,
-         self::SUSPENDED,
-    ];
-  }
+    case SUSPENDED = 'Suspended';
 
-  public static function toArray(): array
-  {
-    return array_column(EmploymentStatus::cases(), 'value');
-  }
+    public static function all(): array
+    {
+        return [
+            self::ACTIVE,
+            self::INACTIVE,
+            self::TERMINATED,
+            self::ON_LEAVE,
+            self::SUSPENDED,
+        ];
+    }
 
-  public function description(): string
-  {
-    return match ($this) {
+    public static function toArray(): array
+    {
+        return array_column(EmploymentStatus::cases(), 'value');
+    }
 
-    self::ACTIVE => 'Funcionario Ativo',
-    self::INACTIVE => 'Funcionario Inativo',
-    self::TERMINATED => 'Funcionario Encerrado',
-    self::ON_LEAVE => 'Funcionario em Licença',
-    self::SUSPENDED => 'Funcionario Suspenso',
+    public function description(): string
+    {
+        return match ($this) {
 
-    };
-  }
+            self::ACTIVE => 'Funcionario Ativo',
+            self::INACTIVE => 'Funcionario Inativo',
+            self::TERMINATED => 'Funcionario Encerrado',
+            self::ON_LEAVE => 'Funcionario em Licença',
+            self::SUSPENDED => 'Funcionario Suspenso',
 
-
+        };
+    }
 }
-

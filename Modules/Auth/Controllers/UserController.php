@@ -51,6 +51,6 @@ final class UserController extends Controller
     {
         $action->handle($uuid);
 
-        return new NoContentResponse();
+        return new NoContentResponse;
     }
 }

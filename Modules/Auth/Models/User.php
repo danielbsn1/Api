@@ -10,11 +10,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
+use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Permission\Traits\HasRoles;
-use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
 final class User extends Authenticatable implements HasMedia, JWTSubject
 {
@@ -166,7 +167,7 @@ final class User extends Authenticatable implements HasMedia, JWTSubject
     {
         self::creating(function (User $user) {
             if (empty($user->uuid)) {
-                $user->uuid = \Illuminate\Support\Str::uuid()->toString();
+                $user->uuid = Str::uuid()->toString();
             }
         });
 

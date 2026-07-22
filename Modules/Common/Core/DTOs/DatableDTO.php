@@ -59,9 +59,9 @@ class DatableDTO extends ValidatedDTO
     protected function casts(): array
     {
         return [
-            'page' => new IntegerCast(),
+            'page' => new IntegerCast,
             'sort_order' => new EnumCast(SortOption::class),
-            'log' => new BooleanCast(),
+            'log' => new BooleanCast,
         ];
     }
 }

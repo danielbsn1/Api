@@ -15,7 +15,7 @@ final readonly class Refresh
     {
         $token = Auth::guard('api')->refresh();
         if (! $token) {
-            throw new AuthenticationException();
+            throw new AuthenticationException;
         }
 
         return [

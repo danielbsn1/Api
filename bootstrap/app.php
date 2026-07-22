@@ -5,7 +5,6 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
 use Modules\Common\Core\Exceptions\NotFoundException;
 
 return Application::configure(basePath: dirname(__DIR__))

@@ -34,8 +34,8 @@ class DashboardDTO extends ValidatedDTO
     {
         return [
             'ignore_cache' => ['sometimes', 'string', 'in:true,false'],
-            'start_date' => ['sometimes', 'string', 'date_format:' . Formatter::API_DATE_FORMAT],
-            'end_date' => ['sometimes', 'string', 'date_format:' . Formatter::API_DATE_FORMAT],
+            'start_date' => ['sometimes', 'string', 'date_format:'.Formatter::API_DATE_FORMAT],
+            'end_date' => ['sometimes', 'string', 'date_format:'.Formatter::API_DATE_FORMAT],
         ];
     }
 
@@ -49,7 +49,7 @@ class DashboardDTO extends ValidatedDTO
     protected function casts(): array
     {
         return [
-            'ignore_cache' => new BooleanCast(),
+            'ignore_cache' => new BooleanCast,
             'start_date' => new CarbonImmutableCast(null, Formatter::API_DATE_FORMAT),
             'end_date' => new CarbonImmutableCast(null, Formatter::API_DATE_FORMAT),
         ];

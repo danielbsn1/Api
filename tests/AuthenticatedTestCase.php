@@ -2,10 +2,10 @@
 
 namespace Tests;
 
+use Modules\Auth\Models\Permission;
 use Modules\Auth\Models\Role;
 use Modules\Auth\Models\User;
 use PragmaRX\Google2FA\Google2FA;
-use Modules\Auth\Models\Permission;
 
 abstract class AuthenticatedTestCase extends TestCase
 {
@@ -36,6 +36,7 @@ abstract class AuthenticatedTestCase extends TestCase
         );
 
         $response->assertStatus(200);
+
         return $response->json('token');
     }
 
@@ -58,6 +59,7 @@ abstract class AuthenticatedTestCase extends TestCase
         );
 
         $response->assertStatus(200);
+
         return $response->json('token');
     }
 

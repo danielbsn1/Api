@@ -11,17 +11,16 @@ use Illuminate\Validation\ValidationException;
 use Modules\Auth\DTOs\SendPasswordResetLinkDTO;
 use Modules\Auth\Models\User;
 
-
 final readonly class SendPasswordResetLink
 {
     public function handle(SendPasswordResetLinkDTO $dto): string
     {
-        ResetPassword::toMailUsing(fn (User $user, string $token) => (new MailMessage())
+        ResetPassword::toMailUsing(fn (User $user, string $token) => (new MailMessage)
             ->subject('Recuperação de Senha')
             ->view('emails.reset-password', [
-                'url' => $dto->callback_url . "{$token}?login={$user->login}",
+                'url' => $dto->callback_url."{$token}?login={$user->login}",
                 'user' => $user,
-                
+
             ]));
 
         $status = Password::sendResetLink(['login' => $dto->login]);
